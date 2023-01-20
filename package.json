@@ -2,7 +2,7 @@
   "name": "fenix_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,10 +17,18 @@
   },
   "homepage": "https://github.com/Carlosgb22/fenix_backend#readme",
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.16.1",
+    "@types/mysql": "^2.15.21",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.7",
     "express": "^4.16.4",
     "install": "^0.13.0",
+    "mqtt": "^4.3.7",
+    "mysql": "^2.18.1",
     "npm": "^9.3.1",
+    "pino": "^8.8.0",
+    "pino-http": "^8.3.1",
     "tslint": "^5.12.1",
     "typescript": "^3.3.3"
   }
