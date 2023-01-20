@@ -1,0 +1,27 @@
+{
+  "name": "fenix_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carlosgb22/fenix_backend.git"
+  },
+  "author": "Carlos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Carlosgb22/fenix_backend/issues"
+  },
+  "homepage": "https://github.com/Carlosgb22/fenix_backend#readme",
+  "devDependencies": {
+    "@types/express": "^4.16.1",
+    "express": "^4.16.4",
+    "install": "^0.13.0",
+    "npm": "^9.3.1",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  }
+}
