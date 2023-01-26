@@ -31,5 +31,8 @@
     "pino-http": "^8.3.1",
     "tslint": "^5.12.1",
     "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.1"
   }
 }

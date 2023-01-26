@@ -40,6 +40,6 @@ app.get("/api/v1", (req, res) => {
     });
 });
 
-app.use('/api/v1/route', routes);
+//app.use('/api/v1/route', routes);
 
 export default app;
