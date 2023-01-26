@@ -8,7 +8,7 @@ const levels = {
   error: 50,
   fatal: 60,
 };
-module.exports = pino(
+export default pino(
   {
     customLevels: levels, // our defined levels
     useOnlyCustomLevels: true,

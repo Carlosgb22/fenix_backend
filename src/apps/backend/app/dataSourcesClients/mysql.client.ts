@@ -1,5 +1,5 @@
 import mysql, { Connection } from 'mysql';
-const logger = require('./services/loggerService');
+import logger from '../../../../services/loggerService';
 
 export default class MySqlConnection {
     connection: Connection | any;

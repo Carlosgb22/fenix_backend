@@ -4,7 +4,7 @@ import MySqlConnection from "./apps/backend/app/dataSourcesClients/mysql.client"
 import appClient from "../src/apps/backend/app/rest/http.client";
 import config from "./apps/backend/config/config";
 const expressPinoLogger = require('express-pino-logger');
-const logger = require('./services/loggerService');
+import logger from './services/loggerService';
 
 class Server {
     app: Application;
@@ -30,7 +30,7 @@ class Server {
                 await this.database.connect();
                 this.subscribeMQTT();
             });
-        } catch (error) {
+        } catch (error:any) {
             logger.error(error);
         }
     }
@@ -39,12 +39,11 @@ class Server {
         try {
             this.mqtt.connect();
             this.mqtt.initSubscriptions();
-        } catch (error) {
+        } catch (error:any) {
             logger.error(error);
         }
     }
 }
-logger.info("algo");
 const server = new Server();
 server.app.get("/", (req, res)=>res.send("Hola"));
 server.start();

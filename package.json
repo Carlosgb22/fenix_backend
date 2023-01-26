@@ -2,11 +2,11 @@
   "name": "fenix_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.ts",
-    "start": "node server.ts"
+    "dev": "nodemon server.js",
+    "start": "node ./src/server.js"
   },
   "repository": {
     "type": "git",

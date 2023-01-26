@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import expressPino from "pino-http";
 import routes from '../../routes/http/entity.routes';
-const logger = require('./services/loggerService');
+import logger from '../../../../services/loggerService';
 import pkg from "../../../../../package.json";
 
 //Creamos la aplicación express
@@ -16,7 +16,6 @@ app.use(
     express.urlencoded({ extended: true }),
     express.json(),
     cors(),
-    expressPino({ logger })
 );
 
 app.get("/", (req, res) => {
@@ -27,6 +26,7 @@ app.get("/", (req, res) => {
         description: app.get("pkg").description,
         author: app.get("pkg").author,
     });
+    logger.info("http.client line 29");
 });
 
 //TODO: Set API DOC

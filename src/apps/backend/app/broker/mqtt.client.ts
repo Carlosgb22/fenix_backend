@@ -1,6 +1,6 @@
 import mqtt from 'mqtt';
 import config  from '../../config/config';
-const logger = require('./services/loggerService');
+import logger from '../../../../services/loggerService';
 //import { EventTopicsTypeEnum, EventTypeEnum } from '../../../../contexts/entity/domain/entities/event.entity';
 import {  } from '../../controllers/mqtt/entity.controller'
 export default class MQTTConnection {
