@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import expressPino from "pino-http";
 import routes from '../../routes/http/entity.routes';
-import logger from '../../../../logguer/index';
+const logger = require('./services/loggerService');
 import pkg from "../../../../../package.json";
 
 //Creamos la aplicación express

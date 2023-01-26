@@ -3,7 +3,8 @@ import MQTTConnection from "./apps/backend/app/broker/mqtt.client";
 import MySqlConnection from "./apps/backend/app/dataSourcesClients/mysql.client";
 import appClient from "../src/apps/backend/app/rest/http.client";
 import config from "./apps/backend/config/config";
-import logger from "./logguer/index";
+const expressPinoLogger = require('express-pino-logger');
+const logger = require('./services/loggerService');
 
 class Server {
     app: Application;
@@ -14,6 +15,12 @@ class Server {
         this.database = new MySqlConnection();
         this.mqtt = new MQTTConnection();
         this.app = appClient;
+        const loggerMidlleware = expressPinoLogger({
+            logger: logger,
+            autoLogging: true,
+          });
+          
+          appClient.use(loggerMidlleware);
     }
 
     start() {
@@ -37,8 +44,9 @@ class Server {
         }
     }
 }
-
+logger.info("algo");
 const server = new Server();
+server.app.get("/", (req, res)=>res.send("Hola"));
 server.start();
 
 export default server;

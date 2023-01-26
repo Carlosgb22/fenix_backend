@@ -1,7 +1,7 @@
 import mqtt from 'mqtt';
 import config  from '../../config/config';
-import logger from '../../../../logguer/index';
-import { EventTopicsTypeEnum, EventTypeEnum } from '../../../../contexts/entity/domain/entities/event.entity';
+const logger = require('./services/loggerService');
+//import { EventTopicsTypeEnum, EventTypeEnum } from '../../../../contexts/entity/domain/entities/event.entity';
 import {  } from '../../controllers/mqtt/entity.controller'
 export default class MQTTConnection {
     client: mqtt.Client | any;
@@ -28,7 +28,7 @@ export default class MQTTConnection {
             });
         });
 
-        this.client.on('message', (topic, payload) => {
+        /*this.client.on('message', (topic, payload) => {
             switch (topic) {
                 case (EventTopicsTypeEnum.X+EventTypeEnum.Y):
                     //TODO
@@ -37,6 +37,6 @@ export default class MQTTConnection {
                     logger.info('Received Message on ' + topic + '/ : ' + payload.toString())
                     break;
             }
-        });
+        });*/
     }
 }
