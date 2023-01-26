@@ -18,6 +18,7 @@ export default class MQTTConnection {
             username: config.MQTT_USERNAME, 
             password: config.MQTT_PASSWORD}
         );
+        logger.info("Mqqt conectado");
     }
 
     initSubscriptions(){

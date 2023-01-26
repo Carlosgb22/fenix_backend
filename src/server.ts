@@ -45,7 +45,9 @@ class Server {
     }
 }
 const server = new Server();
-server.app.get("/", (req, res)=>res.send("Hola"));
 server.start();
 
 export default server;
+/*Docker instalado
+Instalar mosquito para el servidor y configurarlo
+*/
