@@ -1,22 +1,20 @@
 import { Application } from "express";
 import MQTTConnection from "./apps/backend/app/broker/mqtt.client";
-import MySqlConnection from "./apps/backend/app/dataSourcesClients/mysql.client";
 import appClient from "../src/apps/backend/app/rest/http.client";
 import config from "./apps/backend/config/config";
 const expressPinoLogger = require('express-pino-logger');
-import logger from './services/loggerService';
+import loggerService from './services/loggerService';
+import connect from "./apps/backend/app/dataSourcesClients/mysql.client";
 
 class Server {
     app: Application;
-    database: MySqlConnection;
     mqtt: MQTTConnection;
 
     constructor() {
-        this.database = new MySqlConnection();
         this.mqtt = new MQTTConnection();
         this.app = appClient;
         const loggerMidlleware = expressPinoLogger({
-            logger: logger,
+            logger: loggerService,
             autoLogging: true,
         });
 
@@ -26,12 +24,12 @@ class Server {
     start() {
         try {
             this.app.listen(config.PORT, async () => {
-                logger.info(`Servidor corriendo en el puerto: ${config.PORT}`);
-                await this.database.connect();
+                loggerService.info(`Servidor corriendo en el puerto: ${config.PORT}`);
+                connect();
                 this.subscribeMQTT();
             });
         } catch (error: any) {
-            logger.error(error);
+            loggerService.error(error);
         }
     }
 
@@ -40,7 +38,7 @@ class Server {
             this.mqtt.connect();
             this.mqtt.initSubscriptions();
         } catch (error: any) {
-            logger.error(error);
+            loggerService.error(error);
         }
     }
 }

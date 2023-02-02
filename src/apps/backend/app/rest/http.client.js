@@ -5,14 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const entity_routes_1 = __importDefault(require("../../routes/http/entity.routes"));
 const loggerService_1 = __importDefault(require("../../../../services/loggerService"));
 const package_json_1 = __importDefault(require("../../../../../package.json"));
 //Creamos la aplicación express
-const app = express_1.default();
+const app = (0, express_1.default)();
 // Settings
 app.set("pkg", package_json_1.default);
-app.use(express_1.default.urlencoded({ extended: true }), express_1.default.json(), cors_1.default());
-app.get("/", (req, res) => {
+app.use(express_1.default.urlencoded({ extended: true }), express_1.default.json(), (0, cors_1.default)());
+app.get("/api", (req, res) => {
     res.json({
         message: "Welcome to Node API",
         name: app.get("pkg").name,
@@ -20,10 +21,10 @@ app.get("/", (req, res) => {
         description: app.get("pkg").description,
         author: app.get("pkg").author,
     });
-    loggerService_1.default.info("http.client line 29");
+    loggerService_1.default.info("Info Api");
 });
 //TODO: Set API DOC
-app.get("/api/v1", (req, res) => {
+app.get("/api/doc", (req, res) => {
     res.json({
         message: "Welcome to Node API Documentation",
         name: app.get("pkg").name,
@@ -31,7 +32,7 @@ app.get("/api/v1", (req, res) => {
         description: app.get("pkg").description,
         author: app.get("pkg").author,
     });
-    loggerService_1.default.info("http.client line 41");
+    loggerService_1.default.info("Doc Api");
 });
-//app.use('/api/v1/route', routes);
+app.use('/', entity_routes_1.default);
 exports.default = app;

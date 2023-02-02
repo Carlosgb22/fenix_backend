@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import expressPino from "pino-http";
 import routes from '../../routes/http/entity.routes';
-import logger from '../../../../services/loggerService';
+import loggerService from '../../../../services/loggerService';
 import pkg from "../../../../../package.json";
 
 //Creamos la aplicación express
@@ -18,7 +18,7 @@ app.use(
     cors(),
 );
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
     res.json({
         message: "Welcome to Node API",
         name: app.get("pkg").name,
@@ -26,11 +26,11 @@ app.get("/", (req, res) => {
         description: app.get("pkg").description,
         author: app.get("pkg").author,
     });
-    logger.info("http.client line 29");
+    loggerService.info("Info Api");
 });
 
 //TODO: Set API DOC
-app.get("/api/v1", (req, res) => {
+app.get("/api/doc", (req, res) => {
     res.json({
         message: "Welcome to Node API Documentation",
         name: app.get("pkg").name,
@@ -38,9 +38,9 @@ app.get("/api/v1", (req, res) => {
         description: app.get("pkg").description,
         author: app.get("pkg").author,
     });
-    logger.info("http.client line 41");
+    loggerService.info("Doc Api");
 });
 
-//app.use('/api/v1/route', routes);
+app.use('/', routes);
 
 export default app;

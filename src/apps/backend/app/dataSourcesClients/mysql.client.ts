@@ -1,21 +1,13 @@
 import mysql, { Connection } from 'mysql';
 import logger from '../../../../services/loggerService';
 
-export default class MySqlConnection {
-    connection: Connection | any;
-
-    constructor() {
-        this.connection = this.connect;
-        logger.info(new Date().toString() + ": " + "MySql connected");
-    }
-
-    connect(){
-        if (this.connection) return this.connection;
-        return mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'usuario',
-            database: 'fenix_backend'
-        })
-    }
+export default async function connect() {
+    const conn = await mysql.createPool({
+        host: 'localhost',
+        user: 'root',
+        password: 'usuario',
+        database: 'Devices'
+    })
+    logger.info(new Date().toString() + ": " + "MySql connected");
+    return conn;
 }

@@ -1,8 +1,9 @@
 import mqtt from 'mqtt';
 import config from '../../config/config';
-import logger from '../../../../services/loggerService';
+import loggerService from '../../../../services/loggerService';
 //import { EventTopicsTypeEnum, EventTypeEnum } from '../../../../contexts/entity/domain/entities/event.entity';
 import { } from '../../controllers/mqtt/entity.controller'
+
 export default class MQTTConnection {
     client: mqtt.Client | any;
 
@@ -19,14 +20,14 @@ export default class MQTTConnection {
             password: config.MQTT_PASSWORD
         }
         );
-        logger.info("Mqtt conectado");
+        loggerService.info("Mqtt conectado");
     }
 
     initSubscriptions() {
         this.client.on('connect', () => {
-            logger.info('Connected')
+            loggerService.info('Connected')
             this.client.subscribe(config.MQTT_TOPICS, () => {
-                logger.info(`Subscribe to topics`)
+                loggerService.info(`Subscribe to topics`)
             });
         });
 

@@ -1,14 +1,17 @@
+import { Query } from "mysql";
+import connect from "../../../../../apps/backend/app/dataSourcesClients/mysql.client";
 import Device from "../../../domain/entities/device";
 import database from "../../../domain/repositories/device.repo";
 
 export default class DeviceMySQL implements database {
-    getAll(): Array<Device> {
-
-
-        return new Array<Device>
+    
+    async getAll(): Promise<Query> {
+        const conn = await connect()
+        const result = conn.query("SELECT * FROM devices");
+        return result;
     }
 
-    getDeviceById(id: string): Device {
+    async getDeviceById(id: string): Promise<Device> {
 
 
         return {
@@ -22,19 +25,19 @@ export default class DeviceMySQL implements database {
         };
     }
 
-    addDevice(device: Device): boolean {
+    async addDevice(device: Device): Promise<boolean> {
 
 
         return true;
     }
 
-    deleteDevice(id: String): boolean {
+    async deleteDevice(id: String): Promise<boolean> {
 
 
         return true;
     }
 
-    updateDevice(device: Device): boolean {
+    async updateDevice(device: Device): Promise<boolean> {
 
 
         return true;

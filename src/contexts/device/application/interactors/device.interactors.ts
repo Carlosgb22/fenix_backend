@@ -5,6 +5,7 @@ import deleteDevice from "./delete.device.interactors";
 import updateDevice from "./update.device.interactors";
 import getDeviceById from "./get.device.interactors";
 import getAll from "./getAll.device.interactors";
+import { Query } from "mysql";
 
 const adapter = new DeviceMySQL;
 export function addDeviceEx(dev: Device) {
@@ -23,6 +24,6 @@ export function getDeviceByIdEx(id: String) {
     return getDeviceById(adapter);
 }
 
-export function getAllEx() {
+export function getAllEx(): Promise<Query> {
     return getAll(adapter);
 }

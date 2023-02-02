@@ -13,14 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mqtt_client_1 = __importDefault(require("./apps/backend/app/broker/mqtt.client"));
-const mysql_client_1 = __importDefault(require("./apps/backend/app/dataSourcesClients/mysql.client"));
 const http_client_1 = __importDefault(require("../src/apps/backend/app/rest/http.client"));
 const config_1 = __importDefault(require("./apps/backend/config/config"));
 const expressPinoLogger = require('express-pino-logger');
 const loggerService_1 = __importDefault(require("./services/loggerService"));
+const mysql_client_1 = __importDefault(require("./apps/backend/app/dataSourcesClients/mysql.client"));
 class Server {
     constructor() {
-        this.database = new mysql_client_1.default();
         this.mqtt = new mqtt_client_1.default();
         this.app = http_client_1.default;
         const loggerMidlleware = expressPinoLogger({
@@ -33,7 +32,7 @@ class Server {
         try {
             this.app.listen(config_1.default.PORT, () => __awaiter(this, void 0, void 0, function* () {
                 loggerService_1.default.info(`Servidor corriendo en el puerto: ${config_1.default.PORT}`);
-                yield this.database.connect();
+                (0, mysql_client_1.default)();
                 this.subscribeMQTT();
             }));
         }

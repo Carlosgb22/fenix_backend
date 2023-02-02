@@ -13,7 +13,7 @@ const levels = {
     error: 50,
     fatal: 60,
 };
-exports.default = pino_1.default({
+exports.default = (0, pino_1.default)({
     customLevels: levels,
     useOnlyCustomLevels: true,
     level: 'http',
@@ -22,5 +22,5 @@ exports.default = pino_1.default({
         levelFirst: true,
         translateTime: 'yyyy-dd-mm, h:MM:ss TT',
     },
-    timestamp: () => `,"time":"${dayjs_1.default().format()}"`,
+    timestamp: () => `,"time":"${(0, dayjs_1.default)().format()}"`,
 });
