@@ -18,6 +18,6 @@ export default pino(
       levelFirst: true,
       translateTime: 'yyyy-dd-mm, h:MM:ss TT',
     },
-    timestamp: ()=> `,"time":"${dayjs().format()}"`,
+    timestamp: () => `,"time":"${dayjs().format()}"`,
   },
 )

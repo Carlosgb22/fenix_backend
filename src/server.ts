@@ -18,9 +18,9 @@ class Server {
         const loggerMidlleware = expressPinoLogger({
             logger: logger,
             autoLogging: true,
-          });
-          
-          appClient.use(loggerMidlleware);
+        });
+
+        appClient.use(loggerMidlleware);
     }
 
     start() {
@@ -30,7 +30,7 @@ class Server {
                 await this.database.connect();
                 this.subscribeMQTT();
             });
-        } catch (error:any) {
+        } catch (error: any) {
             logger.error(error);
         }
     }
@@ -39,7 +39,7 @@ class Server {
         try {
             this.mqtt.connect();
             this.mqtt.initSubscriptions();
-        } catch (error:any) {
+        } catch (error: any) {
             logger.error(error);
         }
     }
@@ -48,6 +48,3 @@ const server = new Server();
 server.start();
 
 export default server;
-/*Docker instalado
-Instalar mosquito para el servidor y configurarlo
-*/

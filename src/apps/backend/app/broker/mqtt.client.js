@@ -18,6 +18,7 @@ class MQTTConnection {
             username: config_1.default.MQTT_USERNAME,
             password: config_1.default.MQTT_PASSWORD
         });
+        loggerService_1.default.info("Mqtt conectado");
     }
     initSubscriptions() {
         this.client.on('connect', () => {

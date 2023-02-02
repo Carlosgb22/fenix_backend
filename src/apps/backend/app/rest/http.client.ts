@@ -38,6 +38,7 @@ app.get("/api/v1", (req, res) => {
         description: app.get("pkg").description,
         author: app.get("pkg").author,
     });
+    logger.info("http.client line 41");
 });
 
 //app.use('/api/v1/route', routes);

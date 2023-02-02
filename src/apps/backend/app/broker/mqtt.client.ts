@@ -1,8 +1,8 @@
 import mqtt from 'mqtt';
-import config  from '../../config/config';
+import config from '../../config/config';
 import logger from '../../../../services/loggerService';
 //import { EventTopicsTypeEnum, EventTypeEnum } from '../../../../contexts/entity/domain/entities/event.entity';
-import {  } from '../../controllers/mqtt/entity.controller'
+import { } from '../../controllers/mqtt/entity.controller'
 export default class MQTTConnection {
     client: mqtt.Client | any;
 
@@ -10,18 +10,19 @@ export default class MQTTConnection {
         this.client = null;
     }
 
-    connect(){
-        this.client = mqtt.connect(config.MQTT_HOST,{
+    connect() {
+        this.client = mqtt.connect(config.MQTT_HOST, {
             rejectUnauthorized: true,
-            clean: true, 
-            port: 8883, 
-            username: config.MQTT_USERNAME, 
-            password: config.MQTT_PASSWORD}
+            clean: true,
+            port: 8883,
+            username: config.MQTT_USERNAME,
+            password: config.MQTT_PASSWORD
+        }
         );
-        logger.info("Mqqt conectado");
+        logger.info("Mqtt conectado");
     }
 
-    initSubscriptions(){
+    initSubscriptions() {
         this.client.on('connect', () => {
             logger.info('Connected')
             this.client.subscribe(config.MQTT_TOPICS, () => {

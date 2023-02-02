@@ -52,6 +52,5 @@ class Server {
     }
 }
 const server = new Server();
-server.app.get("/", (req, res) => res.send("Hola"));
 server.start();
 exports.default = server;

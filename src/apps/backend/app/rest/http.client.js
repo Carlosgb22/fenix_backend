@@ -8,10 +8,10 @@ const cors_1 = __importDefault(require("cors"));
 const loggerService_1 = __importDefault(require("../../../../services/loggerService"));
 const package_json_1 = __importDefault(require("../../../../../package.json"));
 //Creamos la aplicación express
-const app = (0, express_1.default)();
+const app = express_1.default();
 // Settings
 app.set("pkg", package_json_1.default);
-app.use(express_1.default.urlencoded({ extended: true }), express_1.default.json(), (0, cors_1.default)());
+app.use(express_1.default.urlencoded({ extended: true }), express_1.default.json(), cors_1.default());
 app.get("/", (req, res) => {
     res.json({
         message: "Welcome to Node API",
@@ -31,6 +31,7 @@ app.get("/api/v1", (req, res) => {
         description: app.get("pkg").description,
         author: app.get("pkg").author,
     });
+    loggerService_1.default.info("http.client line 41");
 });
 //app.use('/api/v1/route', routes);
 exports.default = app;
