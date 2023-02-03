@@ -1,9 +1,12 @@
 import { Router } from "express";
-import { getAll } from "../../controllers/mysql/entity.controller";
+import { addDevice, deleteDevice, getAll, getDeviceById, updateDevice } from "../../controllers/mysql/entity.controller";
 
 const router = Router();
 
 router.get("/devices", getAll);
-
+router.get("/devices/:id", getDeviceById);
+router.delete("/devices/:id", deleteDevice);
+router.post("/devices/add", addDevice);
+router.post("/devices/:id/update", updateDevice);
 
 export default router;

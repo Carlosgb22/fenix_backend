@@ -13,40 +13,65 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql_client_1 = __importDefault(require("../../../../../apps/backend/app/dataSourcesClients/mysql.client"));
+const loggerService_1 = __importDefault(require("../../../../../services/loggerService"));
 class DeviceMySQL {
+    constructor() {
+        this.conn = (0, mysql_client_1.default)();
+    }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            const conn = yield (0, mysql_client_1.default)();
-            const result = conn.query("SELECT * FROM devices");
-            return result;
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+                (yield this.conn).query("SELECT * FROM devices", function (error, results, fields) {
+                    if (error)
+                        loggerService_1.default.error(error);
+                    resolve(results);
+                });
+            }));
         });
     }
     getDeviceById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return {
-                id: "",
-                name: "",
-                user: "",
-                status: "",
-                imgCheck: new Blob,
-                imgFail: new Blob,
-                imgWait: new Blob
-            };
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+                (yield this.conn).query("SELECT * FROM devices WHERE id = " + (yield this.conn).escape(id), function (error, results, fields) {
+                    if (error)
+                        loggerService_1.default.error(error);
+                    resolve(results);
+                });
+            }));
         });
     }
-    addDevice(device) {
+    addDevice(dev) {
         return __awaiter(this, void 0, void 0, function* () {
-            return true;
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+                (yield this.conn).query("INSERT INTO devices VALUES (?, ?, ?, ?, ?, ?)", [dev.id, dev.name, dev.userUid, dev.imgcon, dev.imgdiscon, dev.imgwait], function (error, results, fields) {
+                    if (error)
+                        loggerService_1.default.error(error);
+                    resolve(true);
+                });
+            }));
         });
     }
     deleteDevice(id) {
         return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+                (yield this.conn).query("DELETE FROM devices WHERE id = " + (yield this.conn).escape(id), function (error, results, fields) {
+                    if (error)
+                        loggerService_1.default.error(error);
+                    resolve(true);
+                });
+            }));
             return true;
         });
     }
-    updateDevice(device) {
+    updateDevice(dev) {
         return __awaiter(this, void 0, void 0, function* () {
-            return true;
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+                (yield this.conn).query("UPDATE devices SET name = ?, userUid = ?, imgcon = ?, imgdiscon = ?, imgwait = ? WHERE id = ?", [dev.name, dev.userUid, dev.imgcon, dev.imgdiscon, dev.imgwait, dev.id], function (error, results, fields) {
+                    if (error)
+                        loggerService_1.default.error(error);
+                    resolve(true);
+                });
+            }));
         });
     }
 }

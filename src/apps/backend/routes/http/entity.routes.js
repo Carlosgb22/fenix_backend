@@ -4,4 +4,8 @@ const express_1 = require("express");
 const entity_controller_1 = require("../../controllers/mysql/entity.controller");
 const router = (0, express_1.Router)();
 router.get("/devices", entity_controller_1.getAll);
+router.get("/devices/:id", entity_controller_1.getDeviceById);
+router.delete("/devices/:id", entity_controller_1.deleteDevice);
+router.post("/devices/add", entity_controller_1.addDevice);
+router.post("/devices/:id/update", entity_controller_1.updateDevice);
 exports.default = router;

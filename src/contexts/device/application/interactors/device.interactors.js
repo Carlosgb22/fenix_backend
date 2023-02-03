@@ -12,19 +12,19 @@ const get_device_interactors_1 = __importDefault(require("./get.device.interacto
 const getAll_device_interactors_1 = __importDefault(require("./getAll.device.interactors"));
 const adapter = new device_mysql_adapter_1.default;
 function addDeviceEx(dev) {
-    return (0, add_device_interactors_1.default)(adapter);
+    return (0, add_device_interactors_1.default)(adapter)(dev);
 }
 exports.addDeviceEx = addDeviceEx;
 function deleteDeviceEx(id) {
-    return (0, delete_device_interactors_1.default)(adapter);
+    return (0, delete_device_interactors_1.default)(adapter)(id);
 }
 exports.deleteDeviceEx = deleteDeviceEx;
 function updateDeviceEx(dev) {
-    return (0, update_device_interactors_1.default)(adapter);
+    return (0, update_device_interactors_1.default)(adapter)(dev);
 }
 exports.updateDeviceEx = updateDeviceEx;
 function getDeviceByIdEx(id) {
-    return (0, get_device_interactors_1.default)(adapter);
+    return (0, get_device_interactors_1.default)(adapter)(id);
 }
 exports.getDeviceByIdEx = getDeviceByIdEx;
 function getAllEx() {

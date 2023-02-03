@@ -1,8 +1,7 @@
 import { Query } from "mysql";
-import loggerService from "../../../../services/loggerService";
 import database from "../../domain/repositories/device.repo";
+import Device from "../../domain/entities/device";
 
-export default function getAll(repo: database): Promise<Query> {
-    loggerService.info("Llega a getAll.device.interactors");
+export default function getAll(repo: database): Promise<Array<Device>> {
     return repo.getAll();
 }

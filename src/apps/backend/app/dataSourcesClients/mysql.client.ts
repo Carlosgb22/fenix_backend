@@ -1,13 +1,22 @@
-import mysql, { Connection } from 'mysql';
-import logger from '../../../../services/loggerService';
+import mysql from 'mysql';
+import loggerService from '../../../../services/loggerService';
 
 export default async function connect() {
-    const conn = await mysql.createPool({
+    const conn = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
+        user: 'usuario',
         password: 'usuario',
         database: 'Devices'
-    })
-    logger.info(new Date().toString() + ": " + "MySql connected");
+    });
+    loggerService.info(new Date().toString() + ": " + "MySql connected");
+    process.on("SIGINT", () => {
+        conn.end();
+        loggerService.info(new Date().toString() + ": MySql disconnected");
+        process.exit();
+    });
+    process.on("exit", () => {
+        conn.end();
+        loggerService.info(new Date().toString() + ": MySql disconnected");
+    });
     return conn;
 }

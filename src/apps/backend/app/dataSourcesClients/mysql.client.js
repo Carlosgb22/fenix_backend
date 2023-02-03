@@ -16,13 +16,22 @@ const mysql_1 = __importDefault(require("mysql"));
 const loggerService_1 = __importDefault(require("../../../../services/loggerService"));
 function connect() {
     return __awaiter(this, void 0, void 0, function* () {
-        const conn = yield mysql_1.default.createPool({
+        const conn = mysql_1.default.createConnection({
             host: 'localhost',
-            user: 'root',
+            user: 'usuario',
             password: 'usuario',
             database: 'Devices'
         });
         loggerService_1.default.info(new Date().toString() + ": " + "MySql connected");
+        process.on("SIGINT", () => {
+            conn.end();
+            loggerService_1.default.info(new Date().toString() + ": MySql disconnected");
+            process.exit();
+        });
+        process.on("exit", () => {
+            conn.end();
+            loggerService_1.default.info(new Date().toString() + ": MySql disconnected");
+        });
         return conn;
     });
 }

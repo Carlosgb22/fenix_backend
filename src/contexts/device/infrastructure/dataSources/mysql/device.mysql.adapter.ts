@@ -1,45 +1,59 @@
-import { Query } from "mysql";
 import connect from "../../../../../apps/backend/app/dataSourcesClients/mysql.client";
 import Device from "../../../domain/entities/device";
 import database from "../../../domain/repositories/device.repo";
+import loggerService from "../../../../../services/loggerService";
 
 export default class DeviceMySQL implements database {
-    
-    async getAll(): Promise<Query> {
-        const conn = await connect()
-        const result = conn.query("SELECT * FROM devices");
-        return result;
+conn = connect()
+    async getAll(): Promise<Array<Device>> {
+        
+        return new Promise<Array<Device>>(async (resolve, reject) => {
+            (await this.conn).query("SELECT * FROM devices", function (error, results, fields) {
+                if (error) loggerService.error(error);
+                resolve(results);
+            });
+        });
     }
 
     async getDeviceById(id: string): Promise<Device> {
-
-
-        return {
-            id: "",
-            name: "",
-            user: "",
-            status: "",
-            imgCheck: new Blob,
-            imgFail: new Blob,
-            imgWait: new Blob
-        };
+ 
+        return new Promise<Device>(async (resolve, reject) => {
+            (await this.conn).query("SELECT * FROM devices WHERE id = " + (await this.conn).escape(id), function (error, results, fields) {
+                if (error) loggerService.error(error);
+                resolve(results);
+            });
+        })
     }
 
-    async addDevice(device: Device): Promise<boolean> {
+    async addDevice(dev: Device): Promise<boolean> {
 
-
-        return true;
+        return new Promise<boolean>(async (resolve, reject) => {
+            (await this.conn).query("INSERT INTO devices VALUES (?, ?, ?, ?, ?, ?)", [dev.id, dev.name, dev.userUid, dev.imgcon, dev.imgdiscon, dev.imgwait],
+                function (error, results, fields) {
+                    if (error) loggerService.error(error);
+                    resolve(true);
+                });
+        })
     }
 
     async deleteDevice(id: String): Promise<boolean> {
-
+        return new Promise<boolean>(async (resolve, reject) => {
+            (await this.conn).query("DELETE FROM devices WHERE id = " + (await this.conn).escape(id), function (error, results, fields) {
+                if (error) loggerService.error(error);
+                resolve(true);
+            });
+        })
 
         return true;
     }
 
-    async updateDevice(device: Device): Promise<boolean> {
-
-
-        return true;
+    async updateDevice(dev: Device): Promise<boolean> {
+        return new Promise<boolean>(async (resolve, reject) => {
+            (await this.conn).query("UPDATE devices SET name = ?, userUid = ?, imgcon = ?, imgdiscon = ?, imgwait = ? WHERE id = ?",
+                [dev.name, dev.userUid, dev.imgcon, dev.imgdiscon, dev.imgwait, dev.id], function (error, results, fields) {
+                    if (error) loggerService.error(error);
+                    resolve(true);
+                });
+        });
     }
 }
