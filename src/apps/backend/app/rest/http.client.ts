@@ -14,7 +14,7 @@ app.set("pkg", pkg);
 
 app.use(
     express.urlencoded({ extended: true }),
-    express.json(),
+    express.json({limit: '200mb'}),
     cors(),
 );
 

@@ -2,7 +2,7 @@ export default interface Device {
     id: string;
     name: string;
     userUid: string;
-    imgcon: Blob | null;
-    imgdiscon: Blob | null;
-    imgwait: Blob | null;
+    imgcon: Blob;
+    imgdiscon: Blob;
+    imgwait: Blob;
 }
