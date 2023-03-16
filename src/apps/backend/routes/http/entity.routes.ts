@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addDevice, deleteDevice, getAll, getDeviceById, updateDevice } from "../../controllers/mysql/entity.controller";
+import { addDevice, deleteDevice, getAll, getDeviceById, updateDevice } from "../../controllers/mysql/device.controller";
 
 const router = Router();
 
