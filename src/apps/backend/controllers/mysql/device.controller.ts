@@ -2,6 +2,10 @@ import { addDeviceEx, deleteDeviceEx, getAllEx, getDeviceByIdEx, updateDeviceEx 
 import { Request, Response } from "express";
 import loggerService from "../../../../services/loggerService";
 
+//Al llamar a estos metodos se les pasa un request y un response a traves de las cuales
+//se obtienen los parametros requeridos por los metodos llamados dentro y devuelve la 
+//respuesta ncesaria por cada metodo, ademas en caso de error te lo registra en un logger
+
 export function getAll(req: Request, res: Response) {
     getAllEx().then((devices) => res.json(devices)).catch((err) => loggerService.error("Error displaying devices " + err));
 }

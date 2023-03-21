@@ -1,3 +1,4 @@
+//El tipo device tiene varias propiedades las cuales don todas de tipo string
 export default interface Device {
     id: string;
     name: string;

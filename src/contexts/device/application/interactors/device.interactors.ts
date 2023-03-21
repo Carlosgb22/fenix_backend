@@ -7,6 +7,10 @@ import getDeviceById from "./get.device.interactors";
 import getAll from "./getAll.device.interactors";
 
 const adapter = new DeviceMySQL;
+
+//Estos metodos llaman a los metodos de la clase device.mysql.adapters
+//los cuales se encargan de la conexion con la base de datos
+
 export function addDeviceEx(dev: Device) {
     return addDevice(adapter)(dev);
 }
